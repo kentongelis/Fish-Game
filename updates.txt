@@ -1,0 +1,7 @@
+In Fish Game V2, the following changes were brought...
+
+- Updated menu, more cleaner looking.
+
+- Added high score system on menu
+
+-Point counter is now white

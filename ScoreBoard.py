@@ -5,7 +5,7 @@ class ScoreBoard(pygame.sprite.Sprite):
         super(ScoreBoard, self).__init__()
         self.score = score 
         self.font = pygame.font.SysFont("Comic Sans MS", 30)
-        self.surf = self.font.render(f"{self.score}", False, (0,0,0))
+        self.surf = self.font.render(f"{self.score}", False, (255,255,255))
         self.dx = 0
         self.dy = 0
         self.x = x
@@ -19,7 +19,7 @@ class ScoreBoard(pygame.sprite.Sprite):
         self.dy += self.dy
     
     def render(self, screen):
-        self.surf = self.font.render(f"{self.score}", False, (0, 0, 0))
+        self.surf = self.font.render(f"{self.score}", False, (255, 255, 255))
         screen.blit(self.surf, (self.x, self.y))
     
     def reset(self):

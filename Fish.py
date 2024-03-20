@@ -1,43 +1,46 @@
 import pygame
 from GameObj import GameObject
+from ResourcePath import resourcepath
+
 
 lanes = [93, 218, 343]
 
+fish_image = resourcepath('fish.png')
+
 class Fish(GameObject):
     def __init__(self):
-        super(Fish,self).__init__(0,0, 'fish.png')
+        super(Fish,self).__init__(0,0, fish_image)
         self.dx = 0
         self.dy = 0
         self.pos_x = 1
         self.pos_y = 1
         self.reset()
         
-
     def left(self):
         if self.pos_x > 0:
             self.pos_x -= 1
             self.update_dx_dy()
-        self.surf = pygame.image.load('fish.png')
+        self.surf = pygame.image.load(fish_image)
         self.surf = pygame.transform.flip(self.surf, True, False)
 
     def right(self):
         if self.pos_x < len(lanes) - 1:
             self.pos_x += 1
             self.update_dx_dy()
-        self.surf = pygame.image.load('fish.png')
+        self.surf = pygame.image.load(fish_image)
 
     def up(self):
         if self.pos_y > 0:
             self.pos_y -= 1
             self.update_dx_dy()
-        self.surf = pygame.image.load('fish.png')
+        self.surf = pygame.image.load(fish_image)
         self.surf = pygame.transform.rotate(self.surf, 90)
 
     def down(self):
         if self.pos_y < len(lanes) - 1:
             self.pos_y += 1
             self.update_dx_dy()
-        self.surf = pygame.image.load('fish.png')
+        self.surf = pygame.image.load(fish_image)
         self.surf = pygame.transform.rotate(self.surf, 270)
 
     def move(self):
@@ -53,7 +56,7 @@ class Fish(GameObject):
             self.y = 32
     
     def reset(self):
-        self.surf = pygame.image.load('fish.png')
+        self.surf = pygame.image.load(fish_image)
         self.x = lanes[1]
         self.y = lanes[1]
         self.dx = self.x

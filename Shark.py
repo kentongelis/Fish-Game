@@ -1,10 +1,14 @@
 import pygame
 from GameObj import GameObject
 import random
+from ResourcePath import resourcepath
+
+
+shark_image = resourcepath('shark.png')
 
 class Shark(GameObject):
     def __init__(self):
-        super(Shark, self).__init__(0,0, 'shark.png')
+        super(Shark, self).__init__(0,0, shark_image)
         self.surf = pygame.transform.scale(self.surf, (100,100))
         self.dx = 0
         self.dy = 0
@@ -14,24 +18,24 @@ class Shark(GameObject):
         self.x += self.dx
         self.y += self.dy
         if self.x > 564 and self.dx > 0:
-            self.surf = pygame.image.load('shark.png')
+            self.surf = pygame.image.load(shark_image)
             self.surf = pygame.transform.scale(self.surf, (100,100))
             self.reset()
         elif self.x < -64 and self.dx < 0:
-            self.surf = pygame.image.load('shark.png')
+            self.surf = pygame.image.load(shark_image)
             self.surf = pygame.transform.scale(self.surf, (100,100))
             self.reset()        
         elif self.y > 564 and self.dy > 0:
-            self.surf = pygame.image.load('shark.png')
+            self.surf = pygame.image.load(shark_image)
             self.surf = pygame.transform.scale(self.surf, (100,100))
             self.reset()
         elif self.y < -64 and self.dy < 0:
-            self.surf = pygame.image.load('shark.png')
+            self.surf = pygame.image.load(shark_image)
             self.surf = pygame.transform.scale(self.surf, (100,100))
             self.reset()
 
     def reset(self):
-        self.surf = pygame.image.load('shark.png')
+        self.surf = pygame.image.load(shark_image)
         self.surf = pygame.transform.scale(self.surf, (100,100))
         start = [93,218,343]
         numbs = [0,1,2,3]

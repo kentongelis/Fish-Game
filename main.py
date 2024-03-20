@@ -1,15 +1,23 @@
 import pygame
+import random
 from Background import Background
 from Fish import Fish
 from OrangeKrill import OrangeKrill
 from PurpleKrill import PurpleKrill
 from Shark import Shark
 from ScoreBoard import ScoreBoard
+from ResourcePath import resourcepath
 
 pygame.init()
 pygame.font.init()
 
-bground = Background('Background.png', [0,0])
+pygame.display.set_caption("Fish Game V2")
+icon = pygame.image.load(resourcepath('favicon.ico'))
+pygame.display.set_icon(icon)
+
+#'/Users/kentongelis/Desktop/Personal Code/Fish Game/Background.png'
+
+bground = Background(resourcepath('Background.png'), [0,0])
 all_sprites = pygame.sprite.Group()
 krill_sprites = pygame.sprite.Group()
 
@@ -31,6 +39,7 @@ krill_sprites.add(purple_krill)
 screen = pygame.display.set_mode([500, 500])
 clock = pygame.time.Clock()
 font = pygame.font.SysFont("Comic Sans MS", 30)
+surface = pygame.Surface((500,500), pygame.SRCALPHA)
 
 def draw_text(text, font, color, surface, x, y):
     textobj = font.render(text, 1, color)
@@ -39,33 +48,45 @@ def draw_text(text, font, color, surface, x, y):
     surface.blit(textobj, textrect)
     
 click = False
+
+def get_high_score():
+    outfile = open(resourcepath('scores.txt'), "r")
+    file = outfile.read()
+    scores = file.split(' ')
+    if scores[0] == '':
+        return ''
+    else:
+        scores.remove('')
+        scores_list = list(map(int, scores))
+        return str(max(scores_list))
     
 def main_menu():
     while True:
         screen.blit(bground.image, bground.rect)
+        screen.blit(surface, (0,0))
         draw_text("Main Menu", font, (255, 255, 255), screen, 175, 50)
+        draw_text("Play", font, (255, 255, 255), screen, 220, 260)
+        draw_text("Quit Game", font, (255, 255, 255), screen, 175, 330)
+        draw_text("High Score:", font, (255,255,255), screen, 165, 125)
+        draw_text(get_high_score(), font, (255,255,255), screen, 230, 180 )
         
         mx, my = pygame.mouse.get_pos()
        
-        text1 = font.render("Play", True, (0,0,0), (255,255,255))
-        button_1 = text1.get_rect()
-        button_1.center = (250, 250)
-        text2 = font.render("Quit!", True, (0,0,0), (255,255,255))
-        button_2 = text2.get_rect()
-        button_2.center = (250, 350)
-        
-        
+        button_1 = pygame.draw.rect(surface, (0, 0, 0, 0), [220, 260, 55, 40])
+        button_2 = pygame.draw.rect(surface, (0, 0, 0, 0), [175, 330, 150, 40])        
         
         if button_1.collidepoint(mx,my):
             if click:
                 for entity in all_sprites:
                     entity.reset()
+                orange_krill.dx = (random.randint(0,200)/100) + 1
+                purple_krill.dy = (random.randint(0,200)/100) + 1
                 game()
         if button_2.collidepoint(mx,my):
             if click:
                 pygame.quit()
-        screen.blit(text1, button_1)
-        screen.blit(text2, button_2)
+        
+        
         
         click = False
         for event in pygame.event.get():
@@ -74,6 +95,12 @@ def main_menu():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     pygame.quit()
+                elif event.key == pygame.K_RETURN:
+                    for entity in all_sprites:
+                        entity.reset()
+                    orange_krill.dx = (random.randint(0,200)/100) + 1
+                    purple_krill.dy = (random.randint(0,200)/100) + 1
+                    game()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
                     click = True
@@ -109,6 +136,8 @@ def game():
             krill.reset()
         if pygame.sprite.collide_rect(fish, shark):
             running = False
+            infile = open(resourcepath('scores.txt'), "a")
+            infile.write(f'{str(score.score)} ')
         pygame.display.flip()
         clock.tick(60)
         
