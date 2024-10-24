@@ -1,1 +1,1 @@
-python3 -m PyInstaller --onefile --noconsole --icon=favicon.ico --add-data "Background.png:." --add-data "fish.png:." --add-data "shark.png:." --add-data "orange_krill.png:." --add-data "purple_krill.png:." --add-data "favicon.ico:." --add-data "scores.txt:." main.py
+python3 -m PyInstaller --onefile --noconsole --icon=fishgame.icns --add-data "Background.png:." --add-data "fish.png:." --add-data "shark.png:." --add-data "orange_krill.png:." --add-data "purple_krill.png:." --add-data "favicon.ico:." --add-data "scores.txt:." main.py

@@ -4,4 +4,4 @@ In Fish Game V2, the following changes were brought...
 
 - Added high score system on menu
 
--Point counter is now white
+- Point counter is now white

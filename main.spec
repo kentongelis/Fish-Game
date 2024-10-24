@@ -5,7 +5,7 @@ a = Analysis(
     ['main.py'],
     pathex=[],
     binaries=[],
-    datas=[('Background.png', '.'), ('fish.png', '.'), ('shark.png', '.'), ('orange_krill.png', '.'), ('purple_krill.png', '.'), ('favicon.icns', '.'), ('scores.txt', '.')],
+    datas=[('Background.png', '.'), ('fish.png', '.'), ('shark.png', '.'), ('orange_krill.png', '.'), ('purple_krill.png', '.'), ('favicon.ico', '.'), ('scores.txt', '.')],
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},
@@ -34,11 +34,11 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
-    icon=['favicon.ico'],
+    icon=['fishgame.icns'],
 )
 app = BUNDLE(
     exe,
     name='main.app',
-    icon='favicon.ico',
+    icon='fishgame.icns',
     bundle_identifier=None,
 )

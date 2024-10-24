@@ -1,0 +1,3 @@
+([('main',
+   '/Users/kentongelis/Desktop/Personal Code/Fish Game/dist/main',
+   'EXECUTABLE')],)
